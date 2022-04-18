@@ -1,0 +1,13 @@
+.background{
+    position: relative;
+    margin-top: 3%;
+    margin-left: 22%;
+    height: 480px;
+    width: 700px;
+    background-color: rgb(203, 220, 216);
+    box-shadow: 15px 15px rgb(32, 24, 24);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
