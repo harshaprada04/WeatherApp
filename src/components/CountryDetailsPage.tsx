@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import classes from "./CountryDetailsPage.module.css";
 import Card from "./Card";
+import { Button, ButtonGroup } from "@mui/material";
 
 function CountryDetailsPage(props: {
   capital: string;
@@ -10,40 +11,75 @@ function CountryDetailsPage(props: {
 }): any {
   const navigation = useNavigate();
   return (
-    <Card>
-      <div className={classes.main_div}>
+    <div>
+      <Card>
         <table>
           <tbody>
-            <tr>Captail : {props.capital}</tr>
-            <tr>Country's Population : {props.population}</tr>
-            <tr>Longitude : {props.latlng[1]}deg</tr>
+            <tr>
+              <td data-testid="country_capital">Capital : {props.capital}</td>
+            </tr>
+            <tr>
+              <td data-testid="population">
+                Country's Population : {props.population}
+              </td>
+            </tr>
+            <tr>
+              <td data-testid="latitude">Latitude : {props.latlng[0]}deg</td>
+            </tr>
+            <tr>
+              <td data-testid="longitude">Longitude : {props.latlng[1]}deg</td>
+            </tr>
           </tbody>
         </table>
-        <img className={classes.flag} src={props.flag.png} alt="Flag" />
+        <img
+          data-testid="flagImage"
+          className={classes.flag}
+          src={props.flag.png}
+          alt="Contry's Flag"
+        />
         <h2
-          className={classes.flag_url}
+          data-testid="flag_url"
           onClick={() => navigation(`/flagImage?flag_url=${props.flag.png}`)}
+          className={classes.flag_url}
         >
           Image Url
         </h2>
-        <button
-          className={classes.btn}
-          onClick={() => {
-            navigation(`/weather?capital=${props.capital}`);
-          }}
-        >
-          Captail
-        </button>
-        <button
-          className={classes.btn}
-          onClick={() => {
-            navigation("/");
-          }}
-        >
-          Previous Page
-        </button>
-      </div>
-    </Card>
+        <ButtonGroup className={classes.btn}>
+          <Button
+          data-testid = "capital_weather"
+            style={{
+              fontFamily: "'BIZ UDMincho', serif",
+              borderRadius: "5px",
+              textTransform: "none",
+            }}
+            className={classes.btns}
+            name="capital"
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              navigation(`/weather?capital=${props.capital}`);
+            }}
+          >
+            Capital Weather
+          </Button>
+          <Button
+            data-testid = "Previous"
+            style={{
+              fontFamily: "'BIZ UDMincho', serif",
+              borderRadius: "5px",
+              textTransform: "none",
+            }}
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              navigation("/");
+            }}
+          >
+            Previous Page
+          </Button>
+        </ButtonGroup>
+      </Card>
+    </div>
   );
 }
 

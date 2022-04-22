@@ -3,13 +3,16 @@ import { FormEvent, ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { getCountryDetailInfo } from "../actions/country";
 import classes from "./HomePage.module.css";
+import Card from "./Card";
+import { Button } from "@mui/material";
+
 
 function Homepage(): any {
-  const contexts = useContext(Context);
+  
   const [error, setError] = useState<any>("");
   const [country, setCountry] = useState<string>("");
   const navigation = useNavigate();
-
+  const contexts = useContext(Context);
   const handleSubmit = async () => {
     setError("");
     try {
@@ -20,24 +23,45 @@ function Homepage(): any {
       setError(error.message);
     }
   };
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setCountry(e.target.value);
+  };
 
- 
   return (
-    <div className={classes.main}>
-      <form className={classes.display} onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}>
-        <input className={classes.input_box}
-          placeholder="Country Name"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setError(false);
-            setCountry(e.target.value);
-          }}
-          value={country}
-        ></input>
-        {error && <div>{error}</div>}
-        <button  name="submit" className={classes.btn} onClick={handleSubmit} disabled={!country} >
+    <div>
+      
+        <form
+        data-testid="input_form"
+          onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
+          autoComplete="off"
+        >
+          <Card>
+          <input
+            className={classes.input_box}
+            placeholder="Country Name"
+            data-testid="Country Name"
+            onChange={(e) => changeHandler(e)}
+            value={country}
+            autoComplete="off"
+          ></input>
+          {error && <div>{error}</div>}
+        
+        <Button
+          style={{ fontFamily: "'BIZ UDMincho', serif", textTransform: "none" }}
+          className={classes.btn}
+          variant="contained"
+          color="secondary"
+          name="submit"
+          onClick={handleSubmit}
+          disabled={!country}
+          data-testid = "form_button"
+          type="submit"
+        >
           Submit
-        </button>
-      </form>
+        </Button>
+        </Card>
+        </form>
+      
     </div>
   );
 }

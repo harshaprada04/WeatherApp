@@ -1,6 +1,6 @@
-import './App.css';
 import { ContextProvider } from './context/context';
 import Routing from './Routes/Routes';
+
 function App():any {
   return (
     <div >

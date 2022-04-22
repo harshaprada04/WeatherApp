@@ -8,9 +8,11 @@ const Context = createContext({
 
 export function ContextProvider(props:any) {
   const [details, setDetails] = useState([]);
+  
   const context = {
-    details: details,
-    setDetails: setDetails,
+    details,
+    setDetails,
+
   };
 
   return (

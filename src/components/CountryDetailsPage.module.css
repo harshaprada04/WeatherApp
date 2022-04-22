@@ -1,11 +1,3 @@
-.main_div{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    margin-top: 30px;
-}
 table tbody{
     position: relative;
     display: flex;
@@ -18,23 +10,26 @@ tr{
 }
 .flag{
     height: 120px;
-    width: 240px;
+    width: 260px;
     object-fit: contain;
 }
 .flag_url{  
     text-decoration: underline;
-    color: black;
     font-size: 18px;
+    font-weight: normal;
 }
+.flag_url:hover{
+    opacity: 0.88;
+    cursor: pointer;
+}
+
 .btn{
     position: relative;
-    background-color: white;
-    height: 30px;
-    width: 150px;
-    border: 1.5px black solid;
-    border-radius: 5px;
-    font-size: 14px;
-    background-color: rgb(191, 189, 223);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;  
 }
+
 
 
