@@ -15,6 +15,9 @@ let AddRouting = () => {
     latlng: [20, 77],
     flag: {
         png: "www.google.com",
+    },
+    coatOfArms:{
+      png:"www.ddd",
     }
   };
   return (

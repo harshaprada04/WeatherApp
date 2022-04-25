@@ -28,13 +28,14 @@ function CountryDetails() {
         population:string;
         latlng:[number,number];
         flags:{png:string};
-        flag:string;
+        coatOfArms:{png:string};
       }) => (
         <CountryDetailsPage
           capital={data.capital}
           population={data.population}
           latlng={data.latlng}
           flag={data.flags}
+          coatOfArms={data.coatOfArms}
           key={Math.floor(Math.random()*10)}
         />
       ))}

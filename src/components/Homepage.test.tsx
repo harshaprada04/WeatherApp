@@ -21,7 +21,7 @@ it("Button has a name attribute or not", async () => {
   expect(await screen.getByRole("button")).toHaveAttribute("name");
 });
 
-it("Button is diabled or not", async () => {
+it("Button is disabled or not", async () => {
   render(<AddRouting />);
   expect(
     await screen.getByRole("button", {
@@ -55,7 +55,7 @@ it("Button will be enabled or not when we enter the country details", () => {
 jest.mock("../components/CountryDeatails");
 const CountryDetailsMockFunction = CountryDetails as jest.Mock;
 
-test("Checking onClick on the submit button whether the Country Details page will renderb or not", () => {
+test("Checking onClick on the submit button whether the Country Details page will render or not", () => {
   render(<AddRouting />);
   let button = screen.getByRole("button");
   let mockCall = CountryDetailsMockFunction.mockImplementation(() => (

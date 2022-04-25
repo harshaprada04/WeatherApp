@@ -6,9 +6,7 @@ import classes from "./HomePage.module.css";
 import Card from "./Card";
 import { Button } from "@mui/material";
 
-
 function Homepage(): any {
-  
   const [error, setError] = useState<any>("");
   const [country, setCountry] = useState<string>("");
   const navigation = useNavigate();
@@ -29,13 +27,12 @@ function Homepage(): any {
 
   return (
     <div>
-      
-        <form
+      <form
         data-testid="input_form"
-          onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
-          autoComplete="off"
-        >
-          <Card>
+        onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
+        autoComplete="off"
+      >
+        <Card>
           <input
             className={classes.input_box}
             placeholder="Country Name"
@@ -45,23 +42,24 @@ function Homepage(): any {
             autoComplete="off"
           ></input>
           {error && <div>{error}</div>}
-        
-        <Button
-          style={{ fontFamily: "'BIZ UDMincho', serif", textTransform: "none" }}
-          className={classes.btn}
-          variant="contained"
-          color="secondary"
-          name="submit"
-          onClick={handleSubmit}
-          disabled={!country}
-          data-testid = "form_button"
-          type="submit"
-        >
-          Submit
-        </Button>
+          <Button
+            style={{
+              fontFamily: "'BIZ UDMincho', serif",
+              textTransform: "none",
+            }}
+            className={classes.btn}
+            variant="contained"
+            color="secondary"
+            name="submit"
+            onClick={handleSubmit}
+            disabled={!country}
+            data-testid="form_button"
+            type="submit"
+          >
+            Submit
+          </Button>
         </Card>
-        </form>
-      
+      </form>
     </div>
   );
 }

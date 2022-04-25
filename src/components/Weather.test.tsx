@@ -40,7 +40,7 @@ test("Checking onClick on the submit button whether the Country Details page wil
 
 it("To check whether the weather feteched data from api is same or not", async function () {
   const fetechCountry = await fetch(
-    "http://api.weatherstack.com/current?access_key=06db8d9e0d666474631ca9ee34578b71&query=New%20Delhi"
+    "http://api.weatherstack.com/current?access_key=70f1dc709374faf6feae6a9b27b4f350&query=New%20Delhicd "
   );
   const actualResult = await fetechCountry.json();
   const result = await getWeatherDetailInfo("New Delhi");

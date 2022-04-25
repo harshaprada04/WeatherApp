@@ -8,6 +8,7 @@ function CountryDetailsPage(props: {
   population: string;
   latlng: number[];
   flag: { png: string };
+  coatOfArms:{png:string};
 }): any {
   const navigation = useNavigate();
   return (

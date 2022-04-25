@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import Card from "./Card";
 import { useLocation, useNavigate, useParams } from "react-router";
 import classes from "./CountryFlag.module.css";
