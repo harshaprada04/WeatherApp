@@ -1,65 +1,55 @@
-import Context from "../context/context";
 import { FormEvent, ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { getCountryDetailInfo } from "../actions/country";
 import classes from "./HomePage.module.css";
 import Card from "./Card";
-import { Button } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
+import Context from "../context/context";
 
 function Homepage(): any {
-  const [error, setError] = useState<any>("");
-  const [country, setCountry] = useState<string>("");
+  const context = useContext(Context)
   const navigation = useNavigate();
-  const contexts = useContext(Context);
-  const handleSubmit = async () => {
-    setError("");
-    try {
-      const response = await getCountryDetailInfo(country);
-      contexts.setDetails(response);
-      navigation(`/countryDetails?country=${country}`);
-    } catch (error: any) {
-      setError(error.message);
-    }
+  
+  const handleSubmit =  () => {
+      //  navigation(`/countryDetails?country=${context.country}`);
+       navigation(`/countryDetails/`, {
+        state: {
+          country: context.country,
+        },
+      });
   };
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setCountry(e.target.value);
-  };
-
+ 
   return (
-    <div>
-      <form
-        data-testid="input_form"
-        onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
-        autoComplete="off"
-      >
+    <div className={classes.heading}>
+      <Container>
         <Card>
-          <input
-            className={classes.input_box}
-            placeholder="Country Name"
-            data-testid="Country Name"
-            onChange={(e) => changeHandler(e)}
-            value={country}
-            autoComplete="off"
-          ></input>
-          {error && <div>{error}</div>}
+          <div className={classes.allignment}>
+          <TextField 
+          inputProps={{ "data-testid": "content-input" }}
+          style={{backgroundColor:"white", textAlign:"center"}}
+          id="outlined-basic" 
+          label="Country Name" 
+          variant="outlined"
+          autoComplete="off" 
+          onChange={(e) => context.setCountry(e.target.value)}
+          value={context.country}/>
           <Button
             style={{
-              fontFamily: "'BIZ UDMincho', serif",
               textTransform: "none",
             }}
             className={classes.btn}
             variant="contained"
-            color="secondary"
+            color="primary"
             name="submit"
             onClick={handleSubmit}
-            disabled={!country}
+            disabled={!context.country}
             data-testid="form_button"
-            type="submit"
+            type="button"
           >
             Submit
           </Button>
+          </div>
         </Card>
-      </form>
+        </Container>
     </div>
   );
 }

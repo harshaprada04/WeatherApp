@@ -1,84 +1,108 @@
 import { useNavigate } from "react-router";
 import classes from "./CountryDetailsPage.module.css";
 import Card from "./Card";
-import { Button, ButtonGroup } from "@mui/material";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  Typography,
+  TableRow,
+} from "@mui/material";
+import { tableCellClasses } from "@mui/material/TableCell";
 
 function CountryDetailsPage(props: {
   capital: string;
   population: string;
   latlng: number[];
   flag: { png: string };
-  coatOfArms:{png:string};
+  coatOfArms: { png: string };
 }): any {
   const navigation = useNavigate();
   return (
     <div>
       <Card>
-        <table>
-          <tbody>
-            <tr>
-              <td data-testid="country_capital">Capital : {props.capital}</td>
-            </tr>
-            <tr>
-              <td data-testid="population">
-                Country's Population : {props.population}
-              </td>
-            </tr>
-            <tr>
-              <td data-testid="latitude">Latitude : {props.latlng[0]}deg</td>
-            </tr>
-            <tr>
-              <td data-testid="longitude">Longitude : {props.latlng[1]}deg</td>
-            </tr>
-          </tbody>
-        </table>
-        <img
-          data-testid="flagImage"
-          className={classes.flag}
-          src={props.flag.png}
-          alt="Contry's Flag"
-        />
-        <h2
-          data-testid="flag_url"
-          onClick={() => navigation(`/flagImage?flag_url=${props.flag.png}`)}
-          className={classes.flag_url}
+        <Button
+          style={{ textTransform: "none" }}
+          data-testid="previous"
+          className={classes.btn}
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            navigation("/");
+          }}
         >
-          Image Url
-        </h2>
-        <ButtonGroup className={classes.btn}>
-          <Button
-          data-testid = "capital_weather"
+          Back
+        </Button>
+
+        <div className={classes.allignment}>
+          <Table
+            sx={{
+              [`& .${tableCellClasses.root}`]: {
+                borderBottom: "none",
+              },
+            }}
             style={{
-              fontFamily: "'BIZ UDMincho', serif",
-              borderRadius: "5px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingLeft: "125px",
+            }}
+          >
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Typography data-testid="country_capital">
+                    Capital : {props.capital}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography data-testid="population">
+                    Country's Population : {props.population}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography data-testid="latitude">
+                    Latitude : {props.latlng[0]}deg
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography data-testid="longitude">
+                    Longitude : {props.latlng[1]}deg
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <img
+            data-testid="flagImage"
+            className={classes.flag}
+            src={props.flag.png}
+            alt="Contry's Flag"
+          />
+          <Button
+            className={classes.capital_btn}
+            data-testid="capital_weather"
+            style={{
               textTransform: "none",
             }}
-            className={classes.btns}
             name="capital"
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={() => {
               navigation(`/weather?capital=${props.capital}`);
             }}
           >
             Capital Weather
           </Button>
-          <Button
-            data-testid = "Previous"
-            style={{
-              fontFamily: "'BIZ UDMincho', serif",
-              borderRadius: "5px",
-              textTransform: "none",
-            }}
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              navigation("/");
-            }}
-          >
-            Previous Page
-          </Button>
-        </ButtonGroup>
+        </div>
       </Card>
     </div>
   );

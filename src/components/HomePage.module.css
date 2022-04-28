@@ -1,23 +1,20 @@
 .btn{
   position: relative;
-  top: 12%;
+  top: 15%;
   font-family: 'BIZ UDMincho', serif;
 }
-
-.input_box {
-  background-color: white;
-  height: 40px;
-  width: 300px;
-  border: none;
-  border-radius: 7px;
-  text-align: center;
-  font-size: 22px;
+.heading{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f8fa;
+   
 }
-.input_box:focus {
-  outline: none;
-  border: 1.2px black solid;
-}
-
-input:focus::placeholder {
-  opacity: 0;
+.allignment{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width:100%;
 }

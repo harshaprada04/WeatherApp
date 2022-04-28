@@ -1,11 +1,12 @@
 import { ContextProvider } from './context/context';
 import Routing from './Routes/Routes';
+import classes from "./App.css"
 
 function App():any {
   return (
     <div >
     <ContextProvider>
-      <header >
+      <header>
         <Routing/>
       </header>
       </ContextProvider>

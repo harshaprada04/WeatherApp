@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import CountryDetails from "../components/CountryDeatails";
 import Homepage from "../components/Homepage";
 import Weather from "../components/Weather";
-import CountryFlagPage from "../components/CountryFlag";
 import { MemoryRouter } from "react-router";
 import App from "../App";
 
@@ -53,19 +52,4 @@ test("To check whether on weather route the component Weather will be render or 
   );
 
   expect(screen.getByText(/WeatherMock/i)).toBeInTheDocument();
-});
-
-jest.mock("../components/CountryFlag");
-const FlagFunction = CountryFlagPage as jest.Mock;
-
-test("To check whether on flagImage route the component Weather will be render or not", () => {
-    FlagFunction.mockImplementation(() => (
-    <div>FalgMock</div>
-  ));
-  render(
-    <MemoryRouter initialEntries={["/flagImage"]}>
-      <App />
-    </MemoryRouter>
-  );
-  expect(screen.getByText(/FalgMock/i)).toBeInTheDocument();
 });

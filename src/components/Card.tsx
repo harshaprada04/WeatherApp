@@ -8,5 +8,4 @@ function Card(props:{children:any}){
     )
 }
 
-
 export default Card;

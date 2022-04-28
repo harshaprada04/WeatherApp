@@ -1,12 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { getWeatherDetailInfo } from "../actions/weather";
 import classes from "./Weather.module.css";
 import Card from "./Card";
-import { Button } from "@mui/material";
+import {
+  Table,
+  Button,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import { tableCellClasses } from "@mui/material/TableCell";
+import Context from "../context/context";
 
 function Weather(): any {
+  const context = useContext(Context);
   const navigation = useNavigate();
   const { search } = useLocation();
   const capital = new URLSearchParams(search).get("capital");
@@ -17,7 +27,7 @@ function Weather(): any {
     precip: "",
   });
 
-   const getWeatherInformation = async (capital:any) => {
+  const getWeatherInformation = async (capital: any) => {
     try {
       const response: any = await getWeatherDetailInfo(capital);
       setWeathers({
@@ -29,33 +39,71 @@ function Weather(): any {
     } catch (error) {}
   };
   useEffect(() => {
-    if (capital) {
-      getWeatherInformation(capital);
-    }
+    getWeatherInformation(capital);
   }, [capital]);
 
   return (
     <Card>
+      <Button
+        style={{
+          textTransform: "none",
+          position: "relative",
+          top: "10px",
+          left: "10px",
+        }}
+        data-testid="btn"
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          navigation(`/countryDetails?country=${context.country}`);
+        }}
+      >
+        Back
+      </Button>
       <div className={classes.weather_main_div}>
-        <h2 data-testid = "temperature">Temperatute : {weathers.temperature} C</h2>
-        <img src={weathers.weather_icon} alt="Weather Icon" />
-        <h2>Wind Speed : {weathers.wind}kmph</h2>
-        <h2>Precipitation : {weathers.precip}%</h2>
-        <Button
-          style={{
-            fontFamily: "'BIZ UDMincho', serif",
-            borderRadius: "5px",
-            textTransform: "none",
+        <img
+          data-testid="weather_icon"
+          src={weathers.weather_icon}
+          alt="Weather Icon"
+        />
+        <Table
+          sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none",
+            },
           }}
-          data-testid ="btn" 
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            navigation("/countryDetails");
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingLeft: "20px",
           }}
         >
-          Previous Page
-        </Button>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Typography data-testid="temperature">
+                  Temperatute : {weathers.temperature} °C
+                </Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography data-testid="wind_speed">
+                  Wind Speed : {weathers.wind}kmph
+                </Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography data-testid="pecipitation">
+                  Precipitation : {weathers.precip}%
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     </Card>
   );
