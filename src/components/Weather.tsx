@@ -55,7 +55,7 @@ function Weather(): any {
         variant="contained"
         color="primary"
         onClick={() => {
-          navigation(`/countryDetails?country=${context.country}`);
+          navigation(-1)
         }}
       >
         Back

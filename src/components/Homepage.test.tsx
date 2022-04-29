@@ -39,7 +39,6 @@ describe("Home", () => {
 		render(<AddRouting />);
 		const input = await screen.getByRole("textbox");
 		fireEvent.change(input, { target: { value: "test" } });
-    expect (input.innerHTML).toBe('test')
 		const submitButton = screen.getByRole("button");
 		expect(submitButton).toBeEnabled();
 	});

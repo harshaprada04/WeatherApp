@@ -1,4 +1,4 @@
-import { FormEvent, ChangeEvent, useContext, useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router";
 import classes from "./HomePage.module.css";
 import Card from "./Card";
@@ -6,14 +6,13 @@ import { Button, Container, TextField } from "@mui/material";
 import Context from "../context/context";
 
 function Homepage(): any {
-  const context = useContext(Context)
+  const[country,setCountry] = useState<string>("")
   const navigation = useNavigate();
   
   const handleSubmit =  () => {
-      //  navigation(`/countryDetails?country=${context.country}`);
        navigation(`/countryDetails/`, {
         state: {
-          country: context.country,
+          country: country,
         },
       });
   };
@@ -27,11 +26,11 @@ function Homepage(): any {
           inputProps={{ "data-testid": "content-input" }}
           style={{backgroundColor:"white", textAlign:"center"}}
           id="outlined-basic" 
-          label="Country Name" 
+          label="Enter country" 
           variant="outlined"
           autoComplete="off" 
-          onChange={(e) => context.setCountry(e.target.value)}
-          value={context.country}/>
+          onChange={(e) => setCountry(e.target.value)}
+          value={country}/>
           <Button
             style={{
               textTransform: "none",
@@ -41,7 +40,7 @@ function Homepage(): any {
             color="primary"
             name="submit"
             onClick={handleSubmit}
-            disabled={!context.country}
+            disabled={!country}
             data-testid="form_button"
             type="button"
           >

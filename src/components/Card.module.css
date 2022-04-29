@@ -1,11 +1,10 @@
 .background{
     position: relative;
-    margin-top: 2%;
+    margin-top: 2%; 
     margin-left: 15%;
     height: 500px;
     width: 70%;
-    background-color: rgb(240 255 255);
-    box-shadow: 10px 10px #000000ad;
+    background-color:#E7EBF0;
+    box-shadow: 5px 5px #000000ad;
     border-radius: 10px;
-    
 }

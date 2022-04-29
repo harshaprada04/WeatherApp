@@ -7,17 +7,14 @@ import { getCountryDetailInfo } from "./../actions/country";
 function CountryDetails() {
   const contexts = useContext(Context);
   const [error, setError] = useState<boolean>(false);
-  const [countryDetails, setCountryDetails] = useState<any>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
   const location:any = useLocation();
-  console.log(location)
   const {country} = location?.state ;
 
   const getCoutryData = async (country: any) => {
     getCountryDetailInfo(country)
       .then((response: any) =>{
-        setCountryDetails(response)
+        contexts.setDetails(response)
       } )
       .catch(() =>{setError(true)} )
       .finally(() => {setLoading(false)});
@@ -26,11 +23,11 @@ function CountryDetails() {
   useEffect(() => {
     getCoutryData(country);
   }, [country]);
-console.log(countryDetails)
+
   return (
     <div data-testid="map_div">
       {error && "Please Enter a proper country name"}
-      {countryDetails.map(
+      {contexts.details.map(
         (
           data: {
             capital: string;

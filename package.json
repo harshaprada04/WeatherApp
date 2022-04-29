@@ -15,8 +15,8 @@
     "@types/react-test-renderer": "^18.0.0",
     "axios": "^0.26.0",
     "fetch-mock": "^9.11.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -52,6 +52,7 @@
     "jest-prop-type-error"
   ],
   "devDependencies": {
-    "@testing-library/react": "^13.1.1"
+    "@testing-library/react": "^13.1.1",
+    "jest": "^28.0.2"
   }
 }
