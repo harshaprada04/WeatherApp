@@ -27,7 +27,7 @@ Object {
                   for="outlined-basic"
                   id="outlined-basic-label"
                 >
-                  Country Name
+                  Enter country
                 </label>
                 <div
                   class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
@@ -49,7 +49,7 @@ Object {
                       class="css-1ftyaf0"
                     >
                       <span>
-                        Country Name
+                        Enter country
                       </span>
                     </legend>
                   </fieldset>
@@ -95,7 +95,7 @@ Object {
                 for="outlined-basic"
                 id="outlined-basic-label"
               >
-                Country Name
+                Enter country
               </label>
               <div
                 class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
@@ -117,7 +117,7 @@ Object {
                     class="css-1ftyaf0"
                   >
                     <span>
-                      Country Name
+                      Enter country
                     </span>
                   </legend>
                 </fieldset>

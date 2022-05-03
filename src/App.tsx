@@ -1,10 +1,10 @@
 import { ContextProvider } from './context/context';
 import Routing from './Routes/Routes';
-import classes from "./App.css"
+import classes from "./App.module.css"
 
-function App():any {
+function App() {
   return (
-    <div >
+    <div className={classes.background}>
     <ContextProvider>
       <header>
         <Routing/>

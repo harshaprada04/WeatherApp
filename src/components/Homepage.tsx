@@ -1,9 +1,8 @@
 import {  useState } from "react";
 import { useNavigate } from "react-router";
 import classes from "./HomePage.module.css";
-import Card from "./Card";
 import { Button, Container, TextField } from "@mui/material";
-import Context from "../context/context";
+
 
 function Homepage(): any {
   const[country,setCountry] = useState<string>("")
@@ -18,9 +17,8 @@ function Homepage(): any {
   };
  
   return (
-    <div className={classes.heading}>
+    <div className={classes.background}>
       <Container>
-        <Card>
           <div className={classes.allignment}>
           <TextField 
           inputProps={{ "data-testid": "content-input" }}
@@ -47,7 +45,6 @@ function Homepage(): any {
             Submit
           </Button>
           </div>
-        </Card>
         </Container>
     </div>
   );
