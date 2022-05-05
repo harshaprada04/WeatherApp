@@ -2,48 +2,46 @@ import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import CountryDetailsPage from "./CountryDetailsPage";
+import { act } from "react-dom/test-utils";
 
 let AddRouting = () => {
-  const baseProps = {
-    capital: "New Delhi",
-    population: "1380004385",
-    latlng: [20, 77],
-    flag: {
-        png: "www.google.com",
-    },
-    coatOfArms:{
-      png:"www.ddd",
-    }
-  };
   return (
     <BrowserRouter>
-      <CountryDetailsPage {...baseProps}/>
+      <CountryDetailsPage/> 
     </BrowserRouter>
   );
 };
 
-it("Checking whether the correct props value is passing to respective tags or not",()=>{
+it("Page has capital waether button and button has click event",()=>{
   render(<AddRouting/>)
-  let captailValue = screen.getByTestId(/country_capital/i);
-  let populationValue = screen.getByTestId(/population/i);
-  let latitudeValue = screen.getByTestId(/latitude/i);
-  let longitudeValue = screen.getByTestId(/longitude/i);
-  let flagImageSrcValue = screen.getByTestId(/flagImage/i);
-  expect(captailValue.innerHTML).toBe("Capital : New Delhi");
-  expect(populationValue.innerHTML).toBe("Country's Population : 1380004385");
-  expect(latitudeValue.innerHTML).toBe("Latitude : 20deg");
-  expect(longitudeValue.innerHTML).toBe("Longitude : 77deg");
-  expect(flagImageSrcValue).toHaveAttribute("src","www.google.com");
-  expect(flagImageSrcValue).toHaveAttribute("alt","Contry's Flag");
+  let button = screen.getByRole("button",{name:/back/i});
+    expect(button).toBeTruthy();
+    let click = fireEvent.click(button);
+    expect(click).toBe(true);
 })
 
-it("Previous Page and Capital Weather button has click event or not", () => {
-  render(<AddRouting />);
-  let capitalButton = screen.getByTestId(/capital_weather/i);
-  let pviousPageButton = screen.getByTestId(/previous/i);
-  let capitalButtonClick = fireEvent.click(capitalButton)
-  let pviousPageButtonClick = fireEvent.click(pviousPageButton)
-  expect(capitalButtonClick).toBe(true);
-  expect(pviousPageButtonClick).toBe(true);
-});
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useLocation: () => ({
+    state: {
+      country: "India",
+    },
+  }),
+}));
 
+describe("", () => {
+  jest.setTimeout(10000);
+  
+  it("Feteches the country data on loading", async () => {
+     render(<AddRouting />);
+   await act(async () => {
+    await new Promise((r) => setTimeout(r, 5000)); 
+    });
+    const post = screen.getByTestId("country-0");
+    expect(post).toBeInTheDocument()
+    let button = screen.getByRole("button",{name:/capital/i});
+    expect(button).toBeTruthy();
+    let click = fireEvent.click(button);
+    expect(click).toBe(true);
+  });
+});

@@ -1,44 +1,37 @@
 import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import CountryDetails from "./CountryDeatails";
 import { act } from "react-dom/test-utils";
+import routeData from 'react-router'; 
+import CountryDetailsPage from "./CountryDetailsPage";
 
 let AddRouting = () => {
+  
   return (
     <BrowserRouter>
-      <CountryDetails />
+      <CountryDetailsPage /> 
     </BrowserRouter>
   );
 };
-
-it("contains div", async () => {
-  render(<AddRouting />);
-  const tableHead = await screen.getByTestId("map_div");
-  await expect(tableHead).toBeInTheDocument();
-});
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useLocation: () => ({
     state: {
-      country: "india",
+      country: "yyyyy",
     },
   }),
 }));
 
 describe("", () => {
   jest.setTimeout(10000);
-
-  it("contains first post on loading", async () => {
+  
+  it("erorr", async () => {
      render(<AddRouting />);
    await act(async () => {
-  
-    await new Promise((r) => setTimeout(r, 5000));
-       waitFor(() => {
-        const post = screen.getByTestId("post-0");
-        expect(post).toBeInTheDocument()
-      })
-    }); 
+    await new Promise((r) => setTimeout(r, 5000)); 
+    });
+    const post = screen.getByTestId("error");
+    expect(post.innerHTML).toBe("Please Enter a proper country name")
   });
 });

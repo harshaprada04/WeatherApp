@@ -6,12 +6,7 @@ const countryAPI :any = axios.create({
 });
 
 countryAPI.interceptors.response.use((response:any) => {
-  if (response.data.status >= 400) {
-    throw new Error(response.data.message);
-    
-  } else {
     return response.data;
-  }
 });
 
 export const getCountryInfo :any = (countryName:string) => {

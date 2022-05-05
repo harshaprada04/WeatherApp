@@ -1,36 +1,30 @@
 import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import Weather from "./Weather";
+import { act } from "react-dom/test-utils";
 
 let AddRouting = () => {
   return (
-    <BrowserRouter>
+    <MemoryRouter initialEntries={["/weather?capital=New Delhi"]}>
       <Weather />
-    </BrowserRouter>
+      </MemoryRouter>
   );
 };
 
-it("Page has a previous Page Button or not", () => {
+it("The back button has click event or not", () => {
   render(<AddRouting />);
-  expect(screen.getByText(/back/i)).toBeTruthy();
-});
-
-it("The Back Button has click event or not", () => {
-  render(<AddRouting />);
-  const button = screen.getByRole("button");
+  const button = screen.getByText(/back/i);
   const click = fireEvent.click(button)
   expect(click).toBeTruthy();
 });
 
-it("Page has a previous Page Button or not", () => {
-  render(<AddRouting />);
-  let temperature = screen.getByTestId(/temperature/i);
-  let weatherIcon = screen.getByTestId(/weather_icon/i);
-  let weatherSpeed = screen.getByTestId(/wind_speed/i);
-  let pecipitation = screen.getByTestId(/pecipitation/i);
-  expect(temperature).toBeInTheDocument();
-  expect(weatherIcon).toBeInTheDocument();
-  expect(weatherSpeed).toBeInTheDocument();
-  expect(pecipitation).toBeInTheDocument();
-});
+jest.setTimeout(10000)
+it("feteches the post",async()=>{
+  render(<AddRouting/>)
+  await act(async()=>{
+    await new Promise((r)=>setTimeout(r,2000))
+  })
+  let post = screen.getByTestId("post-0");
+  expect(post).toBeInTheDocument()
+})

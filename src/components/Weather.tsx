@@ -13,38 +13,45 @@ import {
   Typography,
 } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
-import Context from "../context/context";
 
 function Weather(): any {
-  const context = useContext(Context);
   const navigation = useNavigate();
   const { search } = useLocation();
   const capital = new URLSearchParams(search).get("capital");
+ 
   const [weathers, setWeathers] = useState({
     temperature: "",
     wind: "",
     weather_icon: "",
     precip: "",
   });
+  const [error , setError] = useState<boolean>(false);
 
-  const getWeatherInformation = async (capital: any) => {
-    try {
-      const response: any = await getWeatherDetailInfo(capital);
+  const getWeatherInformation = () => {
+     getWeatherDetailInfo(capital)
+    .then((response:any)=>{
       setWeathers({
         temperature: response.current.temperature,
         wind: response.current.wind_speed,
         weather_icon: response.current.weather_icons,
         precip: response.current.precip,
       });
-    } catch (error) {}
+     
+    })
+    
+    .catch(()=>{
+      setError(true)
+    })
   };
-  useEffect(() => {
-    getWeatherInformation(capital);
-  }, [capital]);
 
+  useEffect(() => {
+    getWeatherInformation();
+  }, []);
+  
   return (
     <Card>
       <Button
+      name = "back button"
         style={{
           textTransform: "none",
           position: "relative",
@@ -60,12 +67,15 @@ function Weather(): any {
       >
         Back
       </Button>
-      <div className={classes.weather_main_div}>
+      {
+        weathers && 
+      <div className={classes.weather_main_div} data-testid="post-0">
         <img
           data-testid="weather_icon"
           src={weathers.weather_icon}
           alt="Weather Icon"
         />
+        
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
@@ -84,27 +94,58 @@ function Weather(): any {
             <TableRow>
               <TableCell>
                 <Typography data-testid="temperature">
-                  Temperatute : {weathers.temperature} °C
+                  Temperatute
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                  :
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                  {weathers.temperature} °C
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <Typography data-testid="wind_speed">
-                  Wind Speed : {weathers.wind}kmph
+                  Wind Speed
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                : 
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                 {weathers.wind}kmph
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <Typography data-testid="pecipitation">
-                  Precipitation : {weathers.precip}%
+                  Precipitation
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                : 
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>
+                 {weathers.precip}%
                 </Typography>
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </div>
+}
     </Card>
   );
 }
